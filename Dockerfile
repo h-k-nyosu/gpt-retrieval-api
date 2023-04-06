@@ -1,5 +1,5 @@
 # Use an official Python 3.9 image
-FROM python:3.9
+FROM python:3.10
 
 # Set the working directory
 WORKDIR /app
@@ -16,6 +16,9 @@ EXPOSE 8000
 
 # Define environment variable
 ENV NAME World
+
+# Define mountable directories
+VOLUME [ "/app/data" ]
 
 # Run app.py when the container launches
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

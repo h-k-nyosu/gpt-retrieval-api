@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "gpt-retrieval-api"
+version = "0.1.0"
+description = ""
+authors = ["h-k-nyosu <kuro.h1020@gmail.com>"]
+readme = "README.md"
+packages = [{include = "gpt_retrieval_api"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.95.0"
+python-dotenv = "^1.0.0"
+uvicorn = "^0.21.1"
+pydantic = "^1.10.7"
+httpx = "^0.23.3"
+openai = "^0.27.4"
+llama-index = "^0.5.8"
+python-multipart = "^0.0.6"
+html2text = "^2020.1.16"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
