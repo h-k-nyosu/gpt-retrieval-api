@@ -1,4 +1,6 @@
-.PHONY: setup test run deploy clean
+.PHONY: setup test run deploy export-requirements clean
+
+default: run
 
 setup:
 	@echo "Setting up environment"
@@ -12,7 +14,7 @@ test:
 
 run: 
 	@echo "Running the app"
-	poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000
+	poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
 deploy: export-requirements
 	@echo "Deploying the app"
