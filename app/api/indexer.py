@@ -1,5 +1,6 @@
 from typing import List
 from fastapi import APIRouter, HTTPException, Query
+from app.services.indexer_service import index
 
 router = APIRouter()
 
@@ -7,6 +8,6 @@ router = APIRouter()
 async def chat(urls: List[str] = Query(default=None)) -> dict:
     if not urls:
         raise HTTPException(status_code=400, detail="Urls cannot be empty")
-
-    response = f"You sent: {urls}"
-    return {"response": response}
+    
+    status, message = index(urls)
+    return {"status": status, "message": message}
