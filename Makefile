@@ -1,7 +1,4 @@
-.PHONY: setup test run build all export-requirements install-requirements clean
-
-# Set the name of the Docker image to be built
-IMAGE_NAME=gpt-retrieval-api
+.PHONY: setup test run deploy clean
 
 setup:
 	@echo "Setting up environment"
@@ -13,25 +10,18 @@ test:
 	poetry run pytest tests/
 	@echo "Tests complete"
 
-run:
+run: 
 	@echo "Running the app"
-	docker run -p 8000:8000 $(IMAGE_NAME)
+	poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000
 
-build:
+deploy: export-requirements
+	@echo "Deploying the app"
+	vercel .
+
+export-requirements:
 	@echo "Exporting requirements.txt"
 	poetry export -f requirements.txt -o requirements.txt --without-hashes
 	@echo "Exported requirements.txt"
-
-	@echo "Building Docker image"
-	docker build -t $(IMAGE_NAME) .
-	@echo "Docker image built"
-
-all: build run
-
-install-requirements:
-	@echo "Installing requirements"
-	pip install -r requirements.txt
-	@echo "Installed requirements"
 
 clean:
 	@echo "Cleaning environment"
